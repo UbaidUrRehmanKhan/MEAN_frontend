@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header">
+    <h1>User Registeration</h1>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && onRegisterSubmit()">
+        <mat-form-field class="example-container">
+          <input matInput #input maxlength="10" id="username" placeholder="Enter your UserName" formControlName="username" [(ngModel)]="user.username">
+          <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="example-container">
+          <input matInput #email id="email" placeholder="Enter your E-mail" formControlName="email" [(ngModel)]="user.email">
+        </mat-form-field>
+        <mat-form-field class="example-container">
+          <input matInput [type]="hide?'password':'text'" id="password" placeholder="Enter your Password" formControlName="password" [(ngModel)]="user.password">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+        <button type="submit" mat-button class="mat-raised-button mat-primary" [disabled]="!registerForm.valid">Register</button>
+    </form>
+  </div>
+</div>
+
