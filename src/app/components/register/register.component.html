@@ -1,4 +1,4 @@
-<div class="card">
+<!-- <div class="card">
   <div class="card-header">
     <h1>User Registeration</h1>
   </div>
@@ -15,8 +15,83 @@
           <input matInput [type]="hide?'password':'text'" id="password" placeholder="Enter your Password" formControlName="password" [(ngModel)]="user.password">
           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
         </mat-form-field>
-        <button type="submit" mat-button class="mat-raised-button mat-primary" [disabled]="!registerForm.valid">Register</button>
+        <button type="submit" mat-button class="mat-raised-button mat-primary" >Register</button>
     </form>
   </div>
-</div>
+</div> -->
 
+<mat-card>
+  <mat-card-header>
+    <h1>User Registeration</h1>
+  </mat-card-header>
+  <mat-card-content>
+    <form #myForm="ngForm" (ngSubmit)="onRegisterSubmit()" novalidate>
+        <mat-form-field class="example-container">
+          <input matInput #input  maxlength="15" id="username" placeholder="Enter your UserName" name="username" [(ngModel)]="user.username"  #username="ngModel" required>
+          <mat-hint align="end">{{input.value?.length || 0}}/15</mat-hint>
+          <mat-hint>Username does not have any special character.</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="example-container">
+          <input matInput #email #email="ngModel" id="email" placeholder="Enter your E-mail" name="email" [(ngModel)]="user.email" [ngClass]="{ 'is-invalid': (email.dirty || email.touched) && email.invalid }" required email>
+        </mat-form-field>
+        <mat-form-field class="example-container">
+          <input matInput [type]="hide?'password':'text'" id="password" #password placeholder="Enter your Password" name="password" [(ngModel)]="user.password"  #password="ngModel" required>
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-hint>Password must contain 8 to 35 characters with one Upper case, lower case, number & special character.</mat-hint>
+        </mat-form-field>
+        <br>
+        <!-- Custom Success/Error Message -->
+        <div class="example-container show-hide-message">
+          <div [ngClass]="messageClass">
+            {{ message }}
+          </div>
+        </div>
+        <button type="submit" mat-button  class="mat-raised-button mat-primary" [disabled]="!myForm.form.valid">Register</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<!-- <div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h3>Angular 6 Template-Driven Form Validation</h3>
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" required />
+                        <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
+                            <div *ngIf="firstName.errors.required">First Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }" required />
+                        <div *ngIf="f.submitted && lastName.invalid" class="invalid-feedback">
+                            <div *ngIf="lastName.errors.required">Last Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': (email.dirty || email.touched) && email.invalid }" required email />
+                        <div *ngIf="(email.dirty || email.touched) && email.invalid" class="invalid-feedback">
+                            <div *ngIf="email.errors.required">Email is required</div>
+                            <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6" />
+                        <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                            <div *ngIf="password.errors.required">Password is required</div>
+                            <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->

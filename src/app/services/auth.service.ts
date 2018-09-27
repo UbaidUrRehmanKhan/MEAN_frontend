@@ -17,4 +17,14 @@ export class AuthService {
   registerUser(user) {
     return this.http.post(this.domain + '/authentication/register', user).pipe(map(res => res.json()));
   }
+
+  // Function to check if username is taken
+  checkUsername(username) {
+    return this.http.get(this.domain + '/authentication/checkUsername/' + username).pipe(map(res => res.json()));
+  }
+
+  // Function to check if e-mail is taken
+  checkEmail(email) {
+    return this.http.get(this.domain + '/authentication/checkEmail/' + email).pipe(map(res => res.json()));
+  }
 }

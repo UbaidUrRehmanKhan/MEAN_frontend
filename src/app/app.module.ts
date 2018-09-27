@@ -10,7 +10,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
-import { MatIconModule, MatButtonModule} from '@angular/material';
+import { MatIconModule, MatButtonModule, MatCardModule, MatProgressSpinnerModule} from '@angular/material';
 import { AuthService } from './services/auth.service';
 
 @NgModule({
@@ -30,7 +30,9 @@ import { AuthService } from './services/auth.service';
     MatInputModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
