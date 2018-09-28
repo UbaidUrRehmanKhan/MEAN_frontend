@@ -1,8 +1,6 @@
 import { AuthService } from './../../services/auth.service';
 import { RegisterModel } from './../../models/registerModel';
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {MatDialogRef} from '@angular/material';
 
@@ -22,27 +20,10 @@ export class RegisterComponent implements OnInit {
   emailMessage;
   usernameValid;
   usernameMessage;
-  // registerForm: FormGroup;
-  // constructor(private formBuilder: FormBuilder) {}
   constructor(private authService: AuthService,
     public thisDialogRef: MatDialogRef<RegisterComponent>, @Inject(MAT_DIALOG_DATA) public data: string) { }
 
   ngOnInit() {
-
-    // this.registerForm = this.formBuilder.group({
-    //   'username': [this.user.username, [
-    //     Validators.required
-    //   ]],
-    //   'email': [this.user.email, [
-    //     Validators.required,
-    //     Validators.email
-    //   ]],
-    //   'password': [this.user.password, [
-    //     Validators.required,
-    //     Validators.minLength(5),
-    //     Validators.maxLength(20)
-    //   ]],
-    // });
 
   }
 
@@ -76,18 +57,9 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
-  // onCloseConfirm() {
-  //   console.log(this.user);
-  //   this.thisDialogRef.close();
-  // }
+
   onCloseConfirm() {
     console.log(this.user);
-    // const user = {
-    //   email: this.registerForm.get('email').value, // E-mail input field
-    //   username: this.registerForm.get('username').value, // Username input field
-    //   password: this.registerForm.get('password').value // Password input field
-    // };
-    // console.log(user);
     this.authService.registerUser(this.user).subscribe(data => {
       // Resposne from registration attempt
       if (!data.success) {

@@ -1,3 +1,4 @@
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +14,12 @@ import {MatInputModule} from '@angular/material/input';
 import { MatIconModule, MatButtonModule, MatCardModule, MatProgressSpinnerModule, MatDialogModule} from '@angular/material';
 import { AuthService } from './services/auth.service';
 import { LoginComponent } from './components/login/login.component';
+import { AuthenticationGuard } from './directives/authentication.guard';
+
+
+export function tokenGetter() {
+  return localStorage.getItem('bearerToken');
+}
 
 @NgModule({
   declarations: [
@@ -35,9 +42,16 @@ import { LoginComponent } from './components/login/login.component';
     MatButtonModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['example.com'],
+        blacklistedRoutes: ['']
+      }
+    })
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthenticationGuard],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent]
 })
