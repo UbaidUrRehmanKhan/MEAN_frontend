@@ -1,8 +1,11 @@
 import { AuthService } from './../../services/auth.service';
 import { RegisterModel } from './../../models/registerModel';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import {MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -14,15 +17,16 @@ export class RegisterComponent implements OnInit {
   user: RegisterModel = new RegisterModel();
   message = '';
   messageClass = '';
+
   emailValid;
   emailMessage;
   usernameValid;
   usernameMessage;
   // registerForm: FormGroup;
   // constructor(private formBuilder: FormBuilder) {}
-
   constructor(private authService: AuthService,
-    private router: Router) {}
+    public thisDialogRef: MatDialogRef<RegisterComponent>, @Inject(MAT_DIALOG_DATA) public data: string) { }
+
   ngOnInit() {
 
     // this.registerForm = this.formBuilder.group({
@@ -72,8 +76,11 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
-
-  onRegisterSubmit() {
+  // onCloseConfirm() {
+  //   console.log(this.user);
+  //   this.thisDialogRef.close();
+  // }
+  onCloseConfirm() {
     console.log(this.user);
     // const user = {
     //   email: this.registerForm.get('email').value, // E-mail input field
@@ -87,13 +94,18 @@ export class RegisterComponent implements OnInit {
         console.log(data);
         this.messageClass = 'alert alert-danger'; // Set an error class
         this.message = 'Sorry, ' + data.message; // Set an error message
+
       } else {
-        this.messageClass = 'alert alert-success'; // Set a success class
-        this.message = data.message; // Set a success message
         console.log('Saved');
+        this.thisDialogRef.close();
       }
     });
 
   }
+
+  onCloseCancel() {
+    this.thisDialogRef.close();
+  }
+
 
 }

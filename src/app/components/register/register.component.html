@@ -19,13 +19,11 @@
     </form>
   </div>
 </div> -->
-
-<mat-card>
-  <mat-card-header>
-    <h1>User Registeration</h1>
-  </mat-card-header>
-  <mat-card-content>
-    <form #myForm="ngForm" (ngSubmit)="onRegisterSubmit()" novalidate>
+<div>
+  <h1 mat-dialog-title>User Registeration</h1>
+  <hr>
+  <mat-dialog-content>
+      <form #myForm="ngForm"  novalidate>
         <mat-form-field class="example-container">
           <input matInput #input  maxlength="15" id="username" placeholder="Enter your UserName" name="username" [(ngModel)]="user.username"  #username="ngModel" required>
           <mat-hint align="end">{{input.value?.length || 0}}/15</mat-hint>
@@ -46,10 +44,19 @@
             {{ message }}
           </div>
         </div>
-        <button type="submit" mat-button  class="mat-raised-button mat-primary" [disabled]="!myForm.form.valid">Register</button>
+
     </form>
-  </mat-card-content>
-</mat-card>
+  </mat-dialog-content>
+  <hr>
+  <mat-dialog-actions>
+    <button type="submit" mat-button (click)="onCloseConfirm()" class="mat-raised-button mat-primary" [disabled]="!myForm.form.valid" >Register</button>&nbsp;
+    <button mat-raised-button (click)='onCloseCancel()'>CANCEL</button>
+  </mat-dialog-actions>
+</div>
+
+
+
+
 
 <!-- <div class="jumbotron">
     <div class="container">

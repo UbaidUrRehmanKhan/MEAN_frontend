@@ -1,10 +1,11 @@
 <div class="jumbotron text-center">
     <h1>MEAN Stack BlogsHub</h1>
-    <p class="lead">Welcome to the MEAN Stack wordl where you will be able to share and disscuss all issues, latest features and experiences.</p>
+    <p class="lead">Welcome to the MEAN Stack world where you will be able to share and disscuss all issues, latest features and experiences.</p>
     <div>
 
-      <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="btn btn-primary" routerLink='/register'>Register</a>
-      <a href="#" class="btn btn-default">Login</a>
+      <!-- <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="btn btn-primary" routerLink='/register'>Register</a> -->
+      <a (click)="openDialog()" class="btn btn-primary" style="color:white;">Register</a>&nbsp;
+      <a (click)="openDialogLogin()" class="btn btn-danger" style="color:white;">Login</a>
     </div>
   </div>
 
